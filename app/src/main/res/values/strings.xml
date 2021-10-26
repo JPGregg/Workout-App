@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Workout_V2</string>
+    <string name="choose_exercise_to_view_results">Choose Exercise to View Results</string>
 </resources>
