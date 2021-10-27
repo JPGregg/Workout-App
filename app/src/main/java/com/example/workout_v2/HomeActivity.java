@@ -16,20 +16,20 @@ public class HomeActivity extends AppCompatActivity {
         //ExerciseBuildActivity.ExerciseBuild testForResults;
     }
 
-//    public void homeWorkoutClick(View view) {
-//        Intent intent = new Intent(getApplicationContext(), WorkoutActivity.class);
-//        startActivity(intent);
-//    }
+    public void homeWorkoutClick(View view) {
+        Intent intent = new Intent(getApplicationContext(), ExerciseBuildActivity.class);  //temporary until workout activity complete.
+        startActivity(intent);
+    }
 
     public void homeResultsClick(View view) {
         Intent intent = new Intent(getApplicationContext(), ResultSelectionActivity.class);
         startActivity(intent);
     }
 
-//    public void homeStartClick(View view) {
-//        Intent intent = new Intent(getApplicationContext(), StartActivity.class);
-//        startActivity(intent);
-//    }
+    public void homeStartClick(View view) {
+        Intent intent = new Intent(getApplicationContext(), WorkoutSelectActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +38,9 @@ public class HomeActivity extends AppCompatActivity {
 
 
         ////////////////////////////////////////            table deleter
-//        SQLiteDatabase exerciseDatabase = this.openOrCreateDatabase("test1",
-//                MODE_PRIVATE, null);
-//        exerciseDatabase.execSQL("DROP TABLE IF EXISTS Bench");
+        SQLiteDatabase exerciseDatabase = this.openOrCreateDatabase("test1",
+                MODE_PRIVATE, null);
+        exerciseDatabase.execSQL("DROP TABLE IF EXISTS Squats");
         //////////////////////////////////////////
     }
 }

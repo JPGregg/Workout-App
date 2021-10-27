@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".ResultViewActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/squat1" />
+
     <HorizontalScrollView
         android:id="@+id/resultsGraphData"
         android:layout_width="410dp"
