@@ -53,12 +53,11 @@ public class ExerciseBuildActivity extends AppCompatActivity {
             String exerciseName = ((EditText) findViewById(R.id.exerciseNameEditText)).getText().toString();
             SQLiteDatabase exerciseDatabase = this.openOrCreateDatabase("test1",
                     MODE_PRIVATE, null);
-            exerciseDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+exerciseName+" (exCount INT PRIMARY KEY," +
-                    "sets INT(2), totalReps INT(2), weight INT(3), weightType VARCHAR, date VARCHAR," +
-                    "comments VARCHAR, set1 INT(2), set2 INT(2), set3 INT(2), set4 INT(2), set5 INT(2)," +
-                    "set6 INT(2), set7 INT(2), set8 INT(2), set9 INT(2), set10 INT(2))");
+            String newQuery = "CREATE TABLE IF NOT EXISTS " +exerciseName+" (sets INT(2), totalReps INT(2), weight INT(3), weightType TEXT," +
+                    "date TEXT, comments TEXT, set1 INT(2), set2 INT(2), set3 INT(2), set4 INT(2), set5 INT(2))";
+            exerciseDatabase.execSQL(newQuery);
 
-            int setsForInput = Math.min(10,Integer.parseInt(((EditText) findViewById(R.id.numOfSetsEditText)).getText().toString()));
+            int setsForInput = Math.min(5,Integer.parseInt(((EditText) findViewById(R.id.numOfSetsEditText)).getText().toString()));
             int repsForInput = Integer.parseInt(((EditText) findViewById(R.id.numOfRepsEditText)).getText().toString());
             int weightForInput = Integer.parseInt(((EditText) findViewById(R.id.exerciseWeightEditText)).getText().toString());
             String tempRadioResult = "temp Pounds";
