@@ -13,17 +13,17 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class WorkoutSelectActivity extends AppCompatActivity {
+public class DeleteSelectionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_workout_select);
+        setContentView(R.layout.activity_delete_selection);
 
         SQLiteDatabase exerciseDatabase = this.openOrCreateDatabase("test1",
                 MODE_PRIVATE, null);
 
-        ListView exerciseListView = findViewById(R.id.exerciseListView);
+        ListView resultListView = findViewById(R.id.exerciseDeleteListView);
         ArrayList<String> exerciseList = new ArrayList<String>();
         Cursor c = exerciseDatabase.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
 
@@ -35,12 +35,12 @@ public class WorkoutSelectActivity extends AppCompatActivity {
         }
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, exerciseList);
-        exerciseListView.setAdapter(arrayAdapter);
+        resultListView.setAdapter(arrayAdapter);
 
-        exerciseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        resultListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getApplicationContext(), WorkoutStartActivity.class);
+                Intent intent = new Intent(getApplicationContext(), DeleteActivity.class);
                 intent.putExtra("tableName", exerciseList.get(i));
                 startActivity(intent);
             }

@@ -44,7 +44,6 @@ public class ResultSelectionActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getApplicationContext(), ResultViewActivity.class);
                 intent.putExtra("tableName", exerciseList.get(i));
-                //Log.i("Table name: ", exerciseList.get(i));
                 startActivity(intent);
             }
         });

@@ -10,6 +10,11 @@ import android.widget.EditText;
 
 public class HomeActivity extends AppCompatActivity {
 
+    public void homeDeleteClick(View view) {
+        Intent intent = new Intent(getApplicationContext(), DeleteSelectionActivity.class);
+        startActivity(intent);
+    }
+
     public void homeExerciseClick(View view) {
         Intent intent = new Intent(getApplicationContext(), ExerciseBuildActivity.class);
         startActivity(intent);
@@ -38,9 +43,9 @@ public class HomeActivity extends AppCompatActivity {
 
 
         ////////////////////////////////////////            table deleter
-        SQLiteDatabase exerciseDatabase = this.openOrCreateDatabase("test1",
-                MODE_PRIVATE, null);
-        exerciseDatabase.execSQL("DROP TABLE IF EXISTS Squats");
+//        SQLiteDatabase exerciseDatabase = this.openOrCreateDatabase("test1",
+//                MODE_PRIVATE, null);
+//        exerciseDatabase.execSQL("DROP TABLE IF EXISTS temp");
         //////////////////////////////////////////
     }
 }
