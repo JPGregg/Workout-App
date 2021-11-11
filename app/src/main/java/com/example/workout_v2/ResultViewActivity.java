@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -20,6 +21,12 @@ import java.net.URL;
 
 public class ResultViewActivity extends AppCompatActivity {
 
+
+    public void refreshImageClick(View view) {
+        ImageView image = (ImageView) findViewById(R.id.graphImageView);
+        image.setImageResource(R.drawable.graph);
+        Toast.makeText(ResultViewActivity.this, "Working", Toast.LENGTH_SHORT).show();
+    }
 
 
     public void volleyPost(View view){
@@ -38,7 +45,7 @@ public class ResultViewActivity extends AppCompatActivity {
 
         String SUCCESSFUL = "http://127.0.0.1:5000/%22title%22:%22TestGraph%22,%22entries%22:[[[1,2,3,4,10],[7,4,2,8,9],%22r%22,%22line1%22]]";
         String successful_DONT_USE = "http://127.0.0.1:5000/\"title\":\"TestGraph\",\"entries\":[[[1,2,3,4,10],[7,4,2,8,9],\"r\",\"line1\"]]"; //DONT USE, USE ABOVE.
-        String SUCCESSFUL_test = "http://192.168.1.14:5000/%22title%22:%22TestGraph%22,%22entries%22:[[[1,2,3,4,10],[7,4,2,8,9],%22r%22,%22line1%22]]";
+        String SUCCESSFUL_test = "http://192.168.1.14:5000/%22title%22:%22TestGraph%22,%22entries%22:[[[1,2,3,4,10],[7,4,2,8,-9],%22r%22,%22line1%22]]";
 
         //////////////////////////////new stuff today Wed
 
@@ -427,15 +434,15 @@ public class ResultViewActivity extends AppCompatActivity {
         TableRow tblRow = (new TableRow(this));
 
         TextView header0 = new TextView(this);
-        header0.setText("#");
+        header0.setText("#   ");
         tblRow.addView(header0);
 
         TextView header1 = new TextView(this);
-        header1.setText("Date");
+        header1.setText("Date   ");
         tblRow.addView(header1);
 
         TextView header2 = new TextView(this);
-        header2.setText("Weight");
+        header2.setText("Weight   ");
         tblRow.addView(header2);
 
         TextView header3 = new TextView(this);
@@ -446,19 +453,19 @@ public class ResultViewActivity extends AppCompatActivity {
         for (int i = 0; i < 30; i++) {
             TableRow tblRow2 = new TableRow(this);
             TextView nextCell0 = new TextView(this);
-            nextCell0.setText(" " + (i+1));
+            nextCell0.setText(" " + (i+1)+ "   ");
             tblRow2.addView(nextCell0);
 
             TextView nextCell1 = new TextView(this);
-            nextCell1.setText("blah");
+            nextCell1.setText("blah1blah   ");
             tblRow2.addView(nextCell1);
 
             TextView nextCell2 = new TextView(this);
-            nextCell2.setText("blah");
+            nextCell2.setText("blah2   ");
             tblRow2.addView((nextCell2));
 
             TextView nextCell3 = new TextView(this);
-            nextCell3.setText("blah");
+            nextCell3.setText("blah3");
             tblRow2.addView((nextCell3));
 
             tbl.addView(tblRow2);
