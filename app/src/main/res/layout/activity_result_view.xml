@@ -18,15 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/refreshButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="refreshImageClick"
-        android:text="refreshImage"
-        tools:layout_editor_absoluteX="34dp"
-        tools:layout_editor_absoluteY="74dp" />
-
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="409dp"
