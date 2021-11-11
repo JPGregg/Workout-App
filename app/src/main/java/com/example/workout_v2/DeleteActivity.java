@@ -9,11 +9,10 @@ import android.view.View;
 
 public class DeleteActivity extends AppCompatActivity {
 
-    Intent intent = new Intent(DeleteActivity.this, HomeActivity.class);
+    Intent intentHome = new Intent(DeleteActivity.this, HomeActivity.class);
 
     public void backHomeClick (View view) {
-
-        startActivity(intent);
+        startActivity(intentHome);
     }
 
     public void deleteExerciseClick (View view) {
@@ -25,7 +24,7 @@ public class DeleteActivity extends AppCompatActivity {
                 MODE_PRIVATE, null);
         exerciseDatabase.execSQL("DROP TABLE IF EXISTS "+extraTableName);
 
-        startActivity(intent);
+        startActivity(intentHome);
     }
 
     @Override
