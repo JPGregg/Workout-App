@@ -31,7 +31,7 @@ public class WorkoutStartActivity extends AppCompatActivity {
         EditText exerciseWeight = (findViewById(R.id.currentWeightEditText));
         Intent intent = getIntent();
         String extraTableName = intent.getStringExtra("tableName");
-        Toast.makeText(this, extraTableName, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, extraTableName, Toast.LENGTH_SHORT).show();
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -56,7 +56,7 @@ public class WorkoutStartActivity extends AppCompatActivity {
                     String commentBox = ((EditText) findViewById(R.id.editTextCommentBox)).getText().toString();
                     String currentDate = ((EditText) findViewById(R.id.editTextDate)).getText().toString();
 
-                    Toast.makeText(WorkoutStartActivity.this, String.valueOf(totalRepValue), Toast.LENGTH_SHORT).show();    ////////////////safe to delete later. For debugging only.
+//                    Toast.makeText(WorkoutStartActivity.this, String.valueOf(totalRepValue), Toast.LENGTH_SHORT).show();    ////////////////safe to delete later. For debugging only.
 
                     ContentValues cv = new ContentValues();
                     cv.put("set1", set1Value); //set1
@@ -71,11 +71,11 @@ public class WorkoutStartActivity extends AppCompatActivity {
 
                     long insert = db.insert(extraTableName, null, cv);    //IMPORTANT. DO NOT DELETE
 
-                    if (insert == -1) {             ////////////////safe to delete later. For debugging only.
-                        Toast.makeText(WorkoutStartActivity.this, "NOPE", Toast.LENGTH_SHORT).show(); ////////////////safe to delete later. For debugging only.
-                    } else {    ////////////////safe to delete later. For debugging only.
-                        Toast.makeText(WorkoutStartActivity.this, "YES", Toast.LENGTH_SHORT).show();  ////////////////safe to delete later. For debugging only.
-                    }   ////////////////safe to delete later. For debugging only.
+//                    if (insert == -1) {             ////////////////safe to delete later. For debugging only.
+//                        Toast.makeText(WorkoutStartActivity.this, "NOPE", Toast.LENGTH_SHORT).show(); ////////////////safe to delete later. For debugging only.
+//                    } else {    ////////////////safe to delete later. For debugging only.
+//                        Toast.makeText(WorkoutStartActivity.this, "YES", Toast.LENGTH_SHORT).show();  ////////////////safe to delete later. For debugging only.
+//                    }   ////////////////safe to delete later. For debugging only.
 
 
                     ArrayList newListSet1 = new ArrayList();        ////////////////safe to delete later. For debugging only.
@@ -93,10 +93,10 @@ public class WorkoutStartActivity extends AppCompatActivity {
                             newListComments.add(c.getString(5));
                         } while (c.moveToNext());
                     }
-                    Toast.makeText(WorkoutStartActivity.this, newListSet1.toString(), Toast.LENGTH_SHORT).show();         ////////////////safe to delete later. For debugging only.
-                    Toast.makeText(WorkoutStartActivity.this, newListTotalReps.toString(), Toast.LENGTH_SHORT).show();    ////////////////safe to delete later. For debugging only.
-                    Toast.makeText(WorkoutStartActivity.this, newListDate.toString(), Toast.LENGTH_SHORT).show();         ////////////////safe to delete later. For debugging only.
-                    Toast.makeText(WorkoutStartActivity.this, newListComments.toString(), Toast.LENGTH_SHORT).show();     ////////////////safe to delete later. For debugging only.
+//                    Toast.makeText(WorkoutStartActivity.this, newListSet1.toString(), Toast.LENGTH_SHORT).show();         ////////////////safe to delete later. For debugging only.
+//                    Toast.makeText(WorkoutStartActivity.this, newListTotalReps.toString(), Toast.LENGTH_SHORT).show();    ////////////////safe to delete later. For debugging only.
+//                    Toast.makeText(WorkoutStartActivity.this, newListDate.toString(), Toast.LENGTH_SHORT).show();         ////////////////safe to delete later. For debugging only.
+//                    Toast.makeText(WorkoutStartActivity.this, newListComments.toString(), Toast.LENGTH_SHORT).show();     ////////////////safe to delete later. For debugging only.
 
                     Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                     startActivity(intent);

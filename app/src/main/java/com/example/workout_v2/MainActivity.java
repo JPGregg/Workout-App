@@ -27,14 +27,14 @@ public class MainActivity extends AppCompatActivity {
         if (c.moveToPosition(0)) {
 
             while ( !c.isAfterLast() ) {
-                Toast.makeText(this, "Table Name=> "+c.getString(0), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Table Name=> "+c.getString(0), Toast.LENGTH_SHORT).show();
                 c.moveToNext();
             }
         }
 
 
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-        Toast.makeText(this,"Login Successful",Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this,"Login Successful",Toast.LENGTH_SHORT).show();
         startActivity(intent);
     }
 

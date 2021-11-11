@@ -9,21 +9,20 @@ import android.view.View;
 
 public class DeleteActivity extends AppCompatActivity {
 
-    Intent intentHome = new Intent(DeleteActivity.this, HomeActivity.class);
-
     public void backHomeClick (View view) {
+        Intent intentHome = new Intent(DeleteActivity.this, HomeActivity.class);
         startActivity(intentHome);
     }
 
     public void deleteExerciseClick (View view) {
         Intent intent = getIntent();
+        Intent intentHome = new Intent(DeleteActivity.this, HomeActivity.class);
         String extraTableName = intent.getStringExtra("tableName");
 
         //I have the table name, now we need to delete it.
         SQLiteDatabase exerciseDatabase = this.openOrCreateDatabase("test1",
                 MODE_PRIVATE, null);
         exerciseDatabase.execSQL("DROP TABLE IF EXISTS "+extraTableName);
-
         startActivity(intentHome);
     }
 

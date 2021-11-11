@@ -61,7 +61,7 @@ public class ExerciseBuildActivity extends AppCompatActivity {
             int repsForInput = Integer.parseInt(((EditText) findViewById(R.id.numOfRepsEditText)).getText().toString());
             int weightForInput = Integer.parseInt(((EditText) findViewById(R.id.exerciseWeightEditText)).getText().toString());
             String tempRadioResult = "temp Pounds";
-            String dateForInput = "10-25-2021";
+            String dateForInput = "11/11/2021";
             String commentsForInput = "blah blah";
 
 //            Cursor cd= exerciseDatabase.rawQuery("SELECT * FROM newExercise", null);
@@ -72,14 +72,14 @@ public class ExerciseBuildActivity extends AppCompatActivity {
 //                cd.moveToNext();
 //            }
 
-            exerciseDatabase.execSQL("INSERT INTO "+exerciseName+" (sets,weight,weightType,date,comments)"+
+            exerciseDatabase.execSQL("INSERT INTO "+exerciseName+" (sets,weight,weightType,date,comments,totalReps)"+
                     "VALUES ("+setsForInput+","+weightForInput+",'"+tempRadioResult+"'," +
-                    "'"+dateForInput+"','"+dateForInput+"')");
+                    "'"+dateForInput+"','"+dateForInput+"','"+repsForInput+"')");
 
             Cursor c = exerciseDatabase.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
             if (c.moveToPosition(1)) {
                 while ( !c.isAfterLast() ) {
-                    Toast.makeText(this, "Table Name=> "+c.getString(0), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(this, "Table Name=> "+c.getString(0), Toast.LENGTH_SHORT).show();
                     c.moveToNext();
                 }
             }

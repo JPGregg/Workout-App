@@ -33,7 +33,7 @@ public class ResultViewActivity extends AppCompatActivity {
     public void refreshImageClick(View view) {
         ImageView image = (ImageView) findViewById(R.id.graphImageView);
         image.setImageResource(R.drawable.graph);
-        Toast.makeText(ResultViewActivity.this, "Working", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(ResultViewActivity.this, "Working", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -109,12 +109,13 @@ public class ResultViewActivity extends AppCompatActivity {
         String query = "SELECT * FROM " + extraTableName;
         Cursor cursor = db.rawQuery(query,null);
         if (cursor.moveToFirst()) {
+
             do {
                 listInfo.add(cursor.getInt(colNum));
             } while (cursor.moveToNext());
         }
         cursor.close();
-        Toast.makeText(ResultViewActivity.this,listInfo.toString(),Toast.LENGTH_SHORT).show();
+//        Toast.makeText(ResultViewActivity.this,listInfo.toString(),Toast.LENGTH_SHORT).show();
         return listInfo;
     }
 
@@ -132,7 +133,7 @@ public class ResultViewActivity extends AppCompatActivity {
             } while (cursor.moveToNext());
         }
         cursor.close();
-        Toast.makeText(ResultViewActivity.this,listInfo.toString(),Toast.LENGTH_SHORT).show();
+//        Toast.makeText(ResultViewActivity.this,listInfo.toString(),Toast.LENGTH_SHORT).show();
         return listInfo;
     }
 
@@ -145,7 +146,7 @@ public class ResultViewActivity extends AppCompatActivity {
         return returnList;
     }
 
-    
+
     public void addTable() {
         SQLiteDatabase db = this.openOrCreateDatabase("test1",MODE_PRIVATE,null);
         Intent intent = getIntent();
@@ -153,9 +154,12 @@ public class ResultViewActivity extends AppCompatActivity {
         List<Integer> totalReps = new ArrayList<>();    //Lists are for chart and graph.
         List<Integer> weights = new ArrayList<>();
         List<String> dates = new ArrayList<>();
+        List<String> comments = new ArrayList<>();
         totalReps = colInfoInt(1); //1 is col 1 in table, this is totalReps.
         weights = colInfoInt(2);   //col 2 is weights
         dates = colInfoString(4);  //col 4 is date info.
+//        comments = colInfoString(5);
+
 
         globalTotalReps = totalReps.toString();
         globalWeights = weights.toString();
@@ -182,6 +186,12 @@ public class ResultViewActivity extends AppCompatActivity {
         header3.setText("Total Reps");
         tblRow.addView(header3);
 
+        ////////////////////////////
+//        TextView header4 = new TextView(this);
+//        header4.setText("Comments");
+//        tblRow.addView(header4);
+        /////////////////////////////
+
         tbl.addView(tblRow);
         for (int i = 0; i < rowCount; i++) {
             TableRow tblRow2 = new TableRow(this);
@@ -200,6 +210,12 @@ public class ResultViewActivity extends AppCompatActivity {
             TextView nextCell3 = new TextView(this);
             nextCell3.setText(totalReps.get(i).toString());
             tblRow2.addView((nextCell3));
+
+//            ////////////////////////////////////
+//            TextView nextCell4 = new TextView(this);
+//            nextCell4.setText(comments.get(i).toString());
+//            tblRow2.addView((nextCell4));
+//            ////////////////////////////////////
 
             tbl.addView(tblRow2);
         }
