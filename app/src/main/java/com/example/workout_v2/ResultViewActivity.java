@@ -3,6 +3,9 @@ package com.example.workout_v2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,9 +21,14 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ResultViewActivity extends AppCompatActivity {
 
+    String globalTotalReps = "";
+    String globalWeights = "";
+    String globalCount = "";
 
     public void refreshImageClick(View view) {
         ImageView image = (ImageView) findViewById(R.id.graphImageView);
@@ -49,11 +57,17 @@ public class ResultViewActivity extends AppCompatActivity {
 
         //////////////////////////////new stuff today Wed
 
+
+        /////////////////////////////// Testing the global variables injected into successful_test string.
+        String BASE = "http://192.168.1.14:5000/%22title%22:%22TestGraph%22,%22entries%22:[[";
+        String urlForMS = BASE + globalCount + "," + globalTotalReps + ",%22r%22,%22line1%22]]";
+        //////////////////////////////// Testing the global variables injected into successful_test string.
+
         PrepImage test = new PrepImage();
 
         try {
             //Toast.makeText(ResultViewActivity.this, "worked?", Toast.LENGTH_SHORT).show();
-            test.execute(SUCCESSFUL_test);
+            test.execute(urlForMS);  //SUCCESSFUL_test);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -220,7 +234,7 @@ public class ResultViewActivity extends AppCompatActivity {
 //        JSONObject returnObject = new JSONObject();
 
 
-            ///////////////Testing ground start
+        ///////////////Testing ground start
 //        Map<String,String> sendMap = new HashMap<String,String>();
 //        sendMap.put("data",data);
 //        JSONObject sendJSONObject = new JSONObject(sendMap);
@@ -272,7 +286,7 @@ public class ResultViewActivity extends AppCompatActivity {
 //                return params;
 //            }
 
-            ////////////////The testing ground end
+        ////////////////The testing ground end
 
 
 //            @Override
@@ -396,10 +410,41 @@ public class ResultViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_view);
+        SQLiteDatabase db = this.openOrCreateDatabase("test1",MODE_PRIVATE,null);
+        Intent intent = getIntent();
+        String extraTableName = intent.getStringExtra("tableName");
 
-        addtable();
+
+
+        //Toast.makeText(ResultViewActivity.this,Integer.toString(rowCount),Toast.LENGTH_SHORT).show();
+
+//        Intent intent = getIntent();
+//        String extraTableName = intent.getStringExtra("tableName");
+//        Toast.makeText(this, extraTableName, Toast.LENGTH_SHORT).show();
+//        SQLiteDatabase db = this.openOrCreateDatabase("test1",MODE_PRIVATE,null);
+//        String rowCount = "SELECT COUNT(1) FROM "+extraTableName;
+//        String newQuery = "CREATE TABLE IF NOT EXISTS "+extraTableName+" (sets INT(2), totalReps INT(2), weight INT(3), weightType TEXT, " +
+//                "date TEXT, comments TEXT, set1 INT(2), set2 INT(2), set3 INT(2), set4 INT(2), set5 INT(2))";
+//        db.execSQL(rowCount);
+        //Toast.makeText(ResultViewActivity.this,, Toast.LENGTH_SHORT).show();
+
+        addTable();
     }
 
+    public int countRows(String tableName) {
+        int numOfRows = 0;
+        String sqlRowCount = "SELECT COUNT(1) FROM "+tableName;
+        SQLiteDatabase db = this.openOrCreateDatabase("test1",MODE_PRIVATE,null);
+        Cursor cursor = db.rawQuery(sqlRowCount,null);
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            numOfRows = cursor.getInt(0);
+        }
+
+        cursor.close();
+        return numOfRows;
+    }
 
 
 
@@ -429,7 +474,78 @@ public class ResultViewActivity extends AppCompatActivity {
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void addtable() {
+    //class that takes in a columnID, returns a list of integers.
+    //class that takes in a columnID, returns a list of strings.
+
+    public List<Integer> colInfoInt(int colNum) {
+        SQLiteDatabase db = this.openOrCreateDatabase("test1",MODE_PRIVATE,null);
+        Intent intent = getIntent();
+        String extraTableName = intent.getStringExtra("tableName");
+        List<Integer> listInfo = new ArrayList<>();
+        String query = "SELECT * FROM " + extraTableName;
+        Cursor cursor = db.rawQuery(query,null);
+        if (cursor.moveToFirst()) {
+            do {
+                listInfo.add(cursor.getInt(colNum));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        Toast.makeText(ResultViewActivity.this,listInfo.toString(),Toast.LENGTH_SHORT).show();
+        return listInfo;
+    }
+
+
+
+
+    public List<String> colInfoString(int colNum) {
+        List<String> listInfo = new ArrayList<>();
+        SQLiteDatabase db = this.openOrCreateDatabase("test1",MODE_PRIVATE,null);
+        Intent intent = getIntent();
+        String extraTableName = intent.getStringExtra("tableName");
+        String query = "SELECT * FROM " + extraTableName;
+        Cursor cursor = db.rawQuery(query,null);
+        if (cursor.moveToFirst()) {
+            do {
+                listInfo.add(cursor.getString(colNum));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        Toast.makeText(ResultViewActivity.this,listInfo.toString(),Toast.LENGTH_SHORT).show();
+        return listInfo;
+    }
+
+    public List<Integer> listBuilder(int listSize) {
+        List<Integer> returnList = new ArrayList<>();
+        for (int i = 1; i <= listSize; i++) {
+            returnList.add(i);
+        }
+        return returnList;
+    }
+
+
+    public void addTable() {
+        SQLiteDatabase db = this.openOrCreateDatabase("test1",MODE_PRIVATE,null);
+        Intent intent = getIntent();
+        String extraTableName = intent.getStringExtra("tableName");
+        //1 totalRep, 2 weight, 4 date
+
+        //I want a list of the dates, weights, totalReps for the chart.
+        //I want to use the list of totalReps for the MS.
+        //I want to use the numOfRows for the MS.
+        List<Integer> totalReps = new ArrayList<>();
+        List<Integer> weights = new ArrayList<>();
+        List<String> dates = new ArrayList<>();
+        totalReps = colInfoInt(1);
+        weights = colInfoInt(2);
+        dates = colInfoString(4);
+//        Toast.makeText(ResultViewActivity.this,totalReps.toString(),Toast.LENGTH_SHORT).show();
+
+        globalTotalReps = totalReps.toString();
+        globalWeights = weights.toString();
+        globalCount = listBuilder(totalReps.size()).toString();
+
+        int rowCount = countRows(extraTableName);
+
         TableLayout tbl = (TableLayout) findViewById(R.id.exerciseTable);
         TableRow tblRow = (new TableRow(this));
 
@@ -450,7 +566,7 @@ public class ResultViewActivity extends AppCompatActivity {
         tblRow.addView(header3);
 
         tbl.addView(tblRow);
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < rowCount; i++) {
             TableRow tblRow2 = new TableRow(this);
             TextView nextCell0 = new TextView(this);
             nextCell0.setText(" " + (i+1)+ "   ");
