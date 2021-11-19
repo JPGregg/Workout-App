@@ -10,6 +10,8 @@ import android.widget.EditText;
 
 public class HomeActivity extends AppCompatActivity {
 
+    //These functions solely exist to ove between different activities.
+
     public void homeDeleteClick(View view) {
         Intent intent = new Intent(getApplicationContext(), DeleteSelectionActivity.class);
         startActivity(intent);
@@ -42,10 +44,12 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
 
-        ////////////////////////////////////////            table deleter
+        ////////////////////////////////////////   manual table deleter
+
 //        SQLiteDatabase exerciseDatabase = this.openOrCreateDatabase("test1",
 //                MODE_PRIVATE, null);
 //        exerciseDatabase.execSQL("DROP TABLE IF EXISTS temp");
+
         //////////////////////////////////////////
     }
 }

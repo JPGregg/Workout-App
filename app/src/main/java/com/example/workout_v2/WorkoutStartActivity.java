@@ -105,47 +105,5 @@ public class WorkoutStartActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-//        String test = "testing";
-//
-//
-//        //Current Exercise:
-//
-//
-//
-//        SQLiteDatabase exerciseDatabase = this.openOrCreateDatabase("test1",
-//                MODE_PRIVATE, null);
-//        Cursor weightCursor = exerciseDatabase.rawQuery("SELECT weight FROM "+extraTableName+" WHERE exCount=(SELECT max(exCount) FROM "+extraTableName+")",null);
-//
-////        exerciseDatabase.execSQL("INSERT INTO "+extraTableName+" (sets, totalReps, weight," +
-////                "weightType, date, comments, set1, set2, set3, set4, set5, set6, set7, set8, set9," +
-////                "set10) VALUES (5,20,100,'lbs','10292021','comment test',4,4,4,4,4,0,0,0,0,0)");
-//
-//
-//        weightCursor.moveToLast();
-//        if (weightCursor.getPosition() < 0) {
-//            Toast.makeText(this, "Start of database", Toast.LENGTH_SHORT).show();
-//        }
-//
-//        Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
-//
-//        exerciseName.setText("Current Exercise: " + extraTableName);
-//        exerciseWeight.setHint("Weight: " + weightCursor);
-//
-//
-//        exerciseDatabase.execSQL("CREATE TABLE IF NOT EXISTS smallTest2 (value1 INT(2))");
-//
-//        //exerciseDatabase.execSQL("INSERT INTO smallTest VALUES (1)");
-
-
-
-
     }
 }

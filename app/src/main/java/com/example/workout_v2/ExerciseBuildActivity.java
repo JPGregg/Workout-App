@@ -18,38 +18,10 @@ import java.util.Date;
 
 public class ExerciseBuildActivity extends AppCompatActivity {
 
-//    public class ExerciseComplete {
-//        int[] numOfReps;
-//        int weight;
-//        String comments;
-//        Date date;
-//        public ExerciseComplete(int[] repList, int weight, String comments) {
-//            numOfReps = repList;
-//            this.weight = weight;
-//            this.comments = comments;
-//            date = new Date();
-//        }
-//    }
-
-//    public class ExerciseBuild {
-//        int exerciseID;
-//        String exerciseName;
-//        int weightType;
-//        int numOfSets;
-//        ArrayList<ExerciseComplete> exerciseCompleteArray = new ArrayList<ExerciseComplete>();
-//        public ExerciseBuild(int ID, String exerciseName, int weightType, int sets) {
-//            exerciseID = ID;
-//            this.exerciseName = exerciseName;
-//            this.weightType = weightType;
-//            numOfSets = sets;
-//        }
-//
-//    }
-
     public void exerciseSaveClick(View view) {
 
+        //attempts to build out a new table in the database.
         try {
-            //this.deleteDatabase("test1.db");
             String exerciseName = ((EditText) findViewById(R.id.exerciseNameEditText)).getText().toString();
             SQLiteDatabase exerciseDatabase = this.openOrCreateDatabase("test1",
                     MODE_PRIVATE, null);
@@ -62,16 +34,9 @@ public class ExerciseBuildActivity extends AppCompatActivity {
             int weightForInput = Integer.parseInt(((EditText) findViewById(R.id.exerciseWeightEditText)).getText().toString());
             String tempRadioResult = "temp Pounds";
             String dateForInput = "11/11/2021";
-            String commentsForInput = "blah blah";
+            //String commentsForInput = "low priority item";
 
-//            Cursor cd= exerciseDatabase.rawQuery("SELECT * FROM newExercise", null);
-//            int setInfo = cd.getColumnIndex("sets");
-//            cd.moveToFirst();
-//            while (!cd.isAfterLast()) {
-//                Log.i("sets",Integer.toString(cd.getInt(setInfo)));
-//                cd.moveToNext();
-//            }
-
+            //This creates the new table in the database. It then populates it with the provided data.
             exerciseDatabase.execSQL("INSERT INTO "+exerciseName+" (sets,weight,weightType,date,comments,totalReps)"+
                     "VALUES ("+setsForInput+","+weightForInput+",'"+tempRadioResult+"'," +
                     "'"+dateForInput+"','"+dateForInput+"','"+repsForInput+"')");
@@ -79,7 +44,6 @@ public class ExerciseBuildActivity extends AppCompatActivity {
             Cursor c = exerciseDatabase.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
             if (c.moveToPosition(1)) {
                 while ( !c.isAfterLast() ) {
-//                    Toast.makeText(this, "Table Name=> "+c.getString(0), Toast.LENGTH_SHORT).show();
                     c.moveToNext();
                 }
             }
@@ -88,9 +52,6 @@ public class ExerciseBuildActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-//        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-//        startActivity(intent);
     }
 
     @Override

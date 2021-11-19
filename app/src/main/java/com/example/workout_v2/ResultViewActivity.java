@@ -186,7 +186,7 @@ public class ResultViewActivity extends AppCompatActivity {
         header3.setText("Total Reps");
         tblRow.addView(header3);
 
-        ////////////////////////////
+        ////////////////////////////  Haven't figured out how to get this working yet... Don't delete yet.
 //        TextView header4 = new TextView(this);
 //        header4.setText("Comments");
 //        tblRow.addView(header4);
@@ -211,7 +211,7 @@ public class ResultViewActivity extends AppCompatActivity {
             nextCell3.setText(totalReps.get(i).toString());
             tblRow2.addView((nextCell3));
 
-//            ////////////////////////////////////
+//            ////////////////////////////////////      Same here. Don't delete. May figure it out.
 //            TextView nextCell4 = new TextView(this);
 //            nextCell4.setText(comments.get(i).toString());
 //            tblRow2.addView((nextCell4));

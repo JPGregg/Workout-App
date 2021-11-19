@@ -19,7 +19,7 @@ public class DeleteActivity extends AppCompatActivity {
         Intent intentHome = new Intent(DeleteActivity.this, HomeActivity.class);
         String extraTableName = intent.getStringExtra("tableName");
 
-        //I have the table name, now we need to delete it.
+        //I have the table name, now we delete it.
         SQLiteDatabase exerciseDatabase = this.openOrCreateDatabase("test1",
                 MODE_PRIVATE, null);
         exerciseDatabase.execSQL("DROP TABLE IF EXISTS "+extraTableName);

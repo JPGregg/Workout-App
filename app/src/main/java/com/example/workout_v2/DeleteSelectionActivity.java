@@ -34,6 +34,7 @@ public class DeleteSelectionActivity extends AppCompatActivity {
             }
         }
 
+        //builds out the list of exercises for deletion
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, exerciseList);
         resultListView.setAdapter(arrayAdapter);
 

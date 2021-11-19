@@ -12,8 +12,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-
-
+    //Fix this later. Still not up to par...
     public void loginClick(View view) {
         String usernameCheck = ((EditText) findViewById(R.id.usernameEditText)).getText().toString();
         String passwordCheck = ((EditText) findViewById(R.id.passwordEditText)).getText().toString();
@@ -27,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         if (c.moveToPosition(0)) {
 
             while ( !c.isAfterLast() ) {
-//                Toast.makeText(this, "Table Name=> "+c.getString(0), Toast.LENGTH_SHORT).show();
                 c.moveToNext();
             }
         }
