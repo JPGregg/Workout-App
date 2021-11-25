@@ -1,22 +1,20 @@
 package com.example.workout_v2;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 
 public class ResultSelectionActivity extends AppCompatActivity {
 
+    @SuppressLint("Range")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +33,7 @@ public class ResultSelectionActivity extends AppCompatActivity {
                 c.moveToNext();
             }
         }
+        c.close();
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, exerciseList);
         resultListView.setAdapter(arrayAdapter);

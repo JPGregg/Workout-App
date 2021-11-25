@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ResultSelectionActivity">
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/background_p"
+        tools:layout_editor_absoluteX="173dp"
+        tools:layout_editor_absoluteY="242dp" />
+
     <TextView
         android:id="@+id/ResultsSelectionEditText"
         android:layout_width="wrap_content"
@@ -30,6 +42,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ResultsSelectionEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/ResultsSelectionEditText" >
+
+    </ListView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
