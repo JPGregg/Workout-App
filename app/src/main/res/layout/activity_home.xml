@@ -6,14 +6,67 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+    <Button
+        android:id="@+id/homeButtonExercise"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_marginTop="60dp"
+        android:onClick="homeExerciseClick"
+        android:text="+Exercise/Workout"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tempHomeTitle" />
+
+    <Button
+        android:id="@+id/homeButtonStart"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_marginTop="40dp"
+        android:onClick="homeStartClick"
+        android:text="Start New Workout"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeButtonExercise" />
+
+    <Button
+        android:id="@+id/homeButtonResults"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_marginTop="40dp"
+        android:onClick="homeResultsClick"
+        android:text="View Results"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeButtonStart" />
+
+    <Button
+        android:id="@+id/buttonDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:onClick="homeDeleteClick"
+        android:text="Delete Exercise"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeButtonResults" />
+
     <ImageView
         android:id="@+id/imageView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
-        app:srcCompat="@drawable/background_y"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/background_y" />
 
     <TextView
         android:id="@+id/tempHomeTitle"
@@ -29,6 +82,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="409dp"
         android:layout_height="425dp"
         android:layout_marginBottom="40dp"
@@ -41,67 +95,18 @@
         app:layout_constraintTop_toBottomOf="@+id/tempHomeTitle">
 
         <Button
-            android:id="@+id/homeButtonExercise"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:onClick="homeExerciseClick"
-            android:text="+Exercise"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/buttonDelete"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/homeButtonStart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:onClick="homeStartClick"
-            android:text="Start New Workout"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/homeButtonResults" />
-
-        <Button
-            android:id="@+id/homeButtonResults"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:onClick="homeResultsClick"
-            android:text="View Results"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/homeButtonWorkout" />
-
-        <Button
             android:id="@+id/homeButtonWorkout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="114dp"
             android:onClick="homeWorkoutClick"
             android:text="+Workout"
             android:textSize="20sp"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/homeButtonExercise" />
-
-        <Button
-            android:id="@+id/buttonDelete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="14dp"
-            android:layout_marginTop="6dp"
-            android:onClick="homeDeleteClick"
-            android:text="Delete Exercise"
-            app:layout_constraintEnd_toStartOf="@+id/homeButtonExercise"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

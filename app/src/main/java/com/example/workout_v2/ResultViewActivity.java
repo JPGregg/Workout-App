@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -24,10 +26,12 @@ public class ResultViewActivity extends AppCompatActivity {
     String globalWeights = "";
     String globalCount = "";
 
+
     public void refreshImageClick(View view) {
         ImageView image = (ImageView) findViewById(R.id.graphImageView);
         image.setImageResource(R.drawable.graph);
     }
+
 
     public void volleyPost(View view) {
         String BASE = "http://192.168.1.14:5000/%22title%22:%22TestGraph%22,%22entries%22:[[";
@@ -40,13 +44,36 @@ public class ResultViewActivity extends AppCompatActivity {
         }
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public void volleyPostReplacement() {
+        String BASE = "http://192.168.1.14:5000/%22title%22:%22TestGraph%22,%22entries%22:[[";
+        String urlForMS = BASE + globalCount + "," + globalTotalReps + ",%22r%22,%22line1%22]]";
+        PrepImage test = new PrepImage();
+        try {
+            test.execute(urlForMS);
+            //Toast.makeText(ResultViewActivity.this, "test", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_view);
         SQLiteDatabase db = this.openOrCreateDatabase("test1",MODE_PRIVATE,null);
         addTable();
+
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        volleyPostReplacement();
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
+
 
     public int countRows(String tableName) {
         int numOfRows = 0;
@@ -60,6 +87,7 @@ public class ResultViewActivity extends AppCompatActivity {
         cursor.close();
         return numOfRows;
     }
+
 
     class PrepImage extends AsyncTask<String, Void, Void> {
         @Override
@@ -77,6 +105,7 @@ public class ResultViewActivity extends AppCompatActivity {
         }
     }
 
+
     public List<Integer> colInfoInt(int colNum) {
         SQLiteDatabase db = this.openOrCreateDatabase("test1",MODE_PRIVATE,null);
         Intent intent = getIntent();
@@ -92,6 +121,7 @@ public class ResultViewActivity extends AppCompatActivity {
         cursor.close();
         return listInfo;
     }
+
 
     public List<String> colInfoString(int colNum) {
         List<String> listInfo = new ArrayList<>();
@@ -109,6 +139,7 @@ public class ResultViewActivity extends AppCompatActivity {
         return listInfo;
     }
 
+
     public List<Integer> listBuilder(int listSize) {
         List<Integer> returnList = new ArrayList<>();
         for (int i = 1; i <= listSize; i++) {
@@ -117,22 +148,9 @@ public class ResultViewActivity extends AppCompatActivity {
         return returnList;
     }
 
-    public void addTable() {
-        SQLiteDatabase db = this.openOrCreateDatabase("test1",MODE_PRIVATE,null);
-        Intent intent = getIntent();
-        String extraTableName = intent.getStringExtra("tableName");
-        List<Integer> totalReps = new ArrayList<>();    //Lists are for chart and graph.
-        List<Integer> weights = new ArrayList<>();
-        List<String> dates = new ArrayList<>();
-        List<String> comments = new ArrayList<>();
-        totalReps = colInfoInt(1); //1 is col 1 in table, this is totalReps.
-        weights = colInfoInt(2);   //col 2 is weights
-        dates = colInfoString(4);  //col 4 is date info.
-        globalTotalReps = totalReps.toString();
-        globalWeights = weights.toString();
-        globalCount = listBuilder(totalReps.size()).toString();
-        int rowCount = countRows(extraTableName);
 
+    public void tblBuilder(int rowCount, List<String> dates,
+                                 List<Integer> weights, List<Integer> totalReps) {
         TableLayout tbl = (TableLayout) findViewById(R.id.exerciseTable);
         TableRow tblRow = (new TableRow(this));
         TextView header0 = new TextView(this);
@@ -152,10 +170,10 @@ public class ResultViewActivity extends AppCompatActivity {
         for (int i = 0; i < rowCount; i++) {
             TableRow tblRow2 = new TableRow(this);
             TextView nextCell0 = new TextView(this);
-            nextCell0.setText(" " + (i+1)+ "   ");
+            nextCell0.setText(" " + (i + 1) + "   ");
             tblRow2.addView(nextCell0);
             TextView nextCell1 = new TextView(this);
-            nextCell1.setText(dates.get(i).toString()+"     ");
+            nextCell1.setText(dates.get(i).toString() + "     ");
             tblRow2.addView(nextCell1);
             TextView nextCell2 = new TextView(this);
             nextCell2.setText(weights.get(i).toString());
@@ -165,5 +183,23 @@ public class ResultViewActivity extends AppCompatActivity {
             tblRow2.addView((nextCell3));
             tbl.addView(tblRow2);
         }
+    }
+
+
+    public void addTable() {
+        Intent intent = getIntent();
+        String extraTableName = intent.getStringExtra("tableName");
+        List<Integer> totalReps = new ArrayList<>();    //Lists are for chart and graph.
+        List<Integer> weights = new ArrayList<>();
+        List<String> dates = new ArrayList<>();
+        List<String> comments = new ArrayList<>();
+        totalReps = colInfoInt(1); //1 is col 1 in table, this is totalReps.
+        weights = colInfoInt(2);   //col 2 is weights
+        dates = colInfoString(4);  //col 4 is date info.
+        globalTotalReps = totalReps.toString();
+        globalWeights = weights.toString();
+        globalCount = listBuilder(totalReps.size()).toString();
+        int rowCount = countRows(extraTableName);
+        tblBuilder(rowCount, dates, weights, totalReps);
     }
 }

@@ -31,7 +31,7 @@
 
     <EditText
         android:id="@+id/currentWeightEditText"
-        android:layout_width="135dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:ems="10"
@@ -46,7 +46,7 @@
 
     <EditText
         android:id="@+id/editTextSet1"
-        android:layout_width="135dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:ems="10"
@@ -61,7 +61,7 @@
 
     <EditText
         android:id="@+id/editTextSet2"
-        android:layout_width="135dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:ems="10"
@@ -75,7 +75,7 @@
 
     <EditText
         android:id="@+id/editTextSet3"
-        android:layout_width="135dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:ems="10"
@@ -89,7 +89,7 @@
 
     <EditText
         android:id="@+id/editTextSet4"
-        android:layout_width="135dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:ems="10"
@@ -103,7 +103,7 @@
 
     <EditText
         android:id="@+id/editTextSet5"
-        android:layout_width="135dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:ems="10"
@@ -117,11 +117,11 @@
 
     <EditText
         android:id="@+id/editTextDate"
-        android:layout_width="135dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:ems="10"
-        android:hint="Date:"
+        android:hint="Date: MM/DD/YYYY"
         android:inputType="date"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -131,7 +131,7 @@
 
     <EditText
         android:id="@+id/editTextCommentBox"
-        android:layout_width="wrap_content"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:ems="10"
