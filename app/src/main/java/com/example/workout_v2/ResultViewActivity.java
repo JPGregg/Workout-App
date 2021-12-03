@@ -7,14 +7,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -27,68 +23,6 @@ public class ResultViewActivity extends AppCompatActivity {
     String globalCount = "";
 
 
-    public void refreshImageClick(View view) {
-        ImageView image = (ImageView) findViewById(R.id.graphImageView);
-        image.setImageResource(R.drawable.graph);
-    }
-
-
-    public void volleyPost(View view) {
-        String BASE = "http://192.168.1.14:5000/%22title%22:%22TestGraph%22,%22entries%22:[[";
-        String urlForMS = BASE + globalCount + "," + globalTotalReps + ",%22r%22,%22line1%22]]";
-        PrepImage test = new PrepImage();
-        try {
-            test.execute(urlForMS);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void volleyPostReplacement() {
-        String BASE = "http://192.168.1.14:5000/%22title%22:%22TestGraph%22,%22entries%22:[[";
-        String urlForMS = BASE + globalCount + "," + globalTotalReps + ",%22r%22,%22line1%22]]";
-        PrepImage test = new PrepImage();
-        try {
-            test.execute(urlForMS);
-            //Toast.makeText(ResultViewActivity.this, "test", Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_result_view);
-        SQLiteDatabase db = this.openOrCreateDatabase("test1",MODE_PRIVATE,null);
-        addTable();
-
-
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        volleyPostReplacement();
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    }
-
-
-    public int countRows(String tableName) {
-        int numOfRows = 0;
-        String sqlRowCount = "SELECT COUNT(1) FROM "+tableName;
-        SQLiteDatabase db = this.openOrCreateDatabase("test1",MODE_PRIVATE,null);
-        Cursor cursor = db.rawQuery(sqlRowCount,null);
-        if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            numOfRows = cursor.getInt(0);
-        }
-        cursor.close();
-        return numOfRows;
-    }
-
-
     class PrepImage extends AsyncTask<String, Void, Void> {
         @Override
         protected Void doInBackground(String... urls) {
@@ -97,7 +31,7 @@ public class ResultViewActivity extends AppCompatActivity {
                 url = new URL(urls[0]);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.connect();
-                InputStream in = connection.getInputStream();
+                connection.getInputStream();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -106,36 +40,69 @@ public class ResultViewActivity extends AppCompatActivity {
     }
 
 
-    public List<Integer> colInfoInt(int colNum) {
+    public void postRequest() {
+        String BASE = "http://192.168.1.14:5000/%22title%22:%22TestGraph%22,%22entries%22:[[";
+        String urlForMS = BASE + globalCount + "," + globalTotalReps + ",%22r%22,%22line1%22]]";
+        PrepImage test = new PrepImage();
+        try {
+            test.execute(urlForMS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_result_view);
         SQLiteDatabase db = this.openOrCreateDatabase("test1",MODE_PRIVATE,null);
+        addTable(db);
+        postRequest();
+    }
+
+
+    public int countRows(SQLiteDatabase db, String tableName) {
+        int numOfRows = 0;
+        String sqlRowCount = "SELECT COUNT(1) FROM "+tableName;
+        Cursor c = db.rawQuery(sqlRowCount,null);
+        if (c.getCount() > 0) {
+            c.moveToFirst();
+            numOfRows = c.getInt(0);
+        }
+        c.close();
+        return numOfRows;
+    }
+
+
+    public List<Integer> colInfoInt(SQLiteDatabase db, int colNum) {
         Intent intent = getIntent();
         String extraTableName = intent.getStringExtra("tableName");
         List<Integer> listInfo = new ArrayList<>();
         String query = "SELECT * FROM " + extraTableName;
-        Cursor cursor = db.rawQuery(query,null);
-        if (cursor.moveToFirst()) {
+        Cursor c = db.rawQuery(query,null);
+        if (c.moveToFirst()) {
             do {
-                listInfo.add(cursor.getInt(colNum));
-            } while (cursor.moveToNext());
+                listInfo.add(c.getInt(colNum));
+            } while (c.moveToNext());
         }
-        cursor.close();
+        c.close();
         return listInfo;
     }
 
 
-    public List<String> colInfoString(int colNum) {
+    public List<String> colInfoString(SQLiteDatabase db, int colNum) {
         List<String> listInfo = new ArrayList<>();
-        SQLiteDatabase db = this.openOrCreateDatabase("test1",MODE_PRIVATE,null);
         Intent intent = getIntent();
         String extraTableName = intent.getStringExtra("tableName");
         String query = "SELECT * FROM " + extraTableName;
-        Cursor cursor = db.rawQuery(query,null);
-        if (cursor.moveToFirst()) {
+        Cursor c = db.rawQuery(query,null);
+        if (c.moveToFirst()) {
             do {
-                listInfo.add(cursor.getString(colNum));
-            } while (cursor.moveToNext());
+                listInfo.add(c.getString(colNum));
+            } while (c.moveToNext());
         }
-        cursor.close();
+        c.close();
         return listInfo;
     }
 
@@ -149,10 +116,8 @@ public class ResultViewActivity extends AppCompatActivity {
     }
 
 
-    public void tblBuilder(int rowCount, List<String> dates,
-                                 List<Integer> weights, List<Integer> totalReps) {
-        TableLayout tbl = (TableLayout) findViewById(R.id.exerciseTable);
-        TableRow tblRow = (new TableRow(this));
+    //part 3 of 3 for building the table. Builds headers.
+    public void headerBuilder(TableRow tblRow){
         TextView header0 = new TextView(this);
         header0.setText("#   ");
         tblRow.addView(header0);
@@ -165,7 +130,18 @@ public class ResultViewActivity extends AppCompatActivity {
         TextView header3 = new TextView(this);
         header3.setText("Total Reps");
         tblRow.addView(header3);
+    }
 
+
+    //part 2 of 3 for building the table. Starts the headers and fills in rows.
+    public void tblBuilder(int rowCount, List<String> dates,
+                           List<Integer> weights, List<Integer> totalReps) {
+        //builds headers
+        TableLayout tbl = (TableLayout) findViewById(R.id.exerciseTable);
+        TableRow tblRow = (new TableRow(this));
+        headerBuilder(tblRow);
+
+        //adds the data to each row
         tbl.addView(tblRow);
         for (int i = 0; i < rowCount; i++) {
             TableRow tblRow2 = new TableRow(this);
@@ -186,20 +162,20 @@ public class ResultViewActivity extends AppCompatActivity {
     }
 
 
-    public void addTable() {
+    //part 1 of 3 for building the table. Compiles the data together
+    public void addTable(SQLiteDatabase db) {
         Intent intent = getIntent();
         String extraTableName = intent.getStringExtra("tableName");
         List<Integer> totalReps = new ArrayList<>();    //Lists are for chart and graph.
         List<Integer> weights = new ArrayList<>();
         List<String> dates = new ArrayList<>();
-        List<String> comments = new ArrayList<>();
-        totalReps = colInfoInt(1); //1 is col 1 in table, this is totalReps.
-        weights = colInfoInt(2);   //col 2 is weights
-        dates = colInfoString(4);  //col 4 is date info.
+        totalReps = colInfoInt(db, 1); //1 is col 1 in table, this is totalReps.
+        weights = colInfoInt(db, 2);   //col 2 is weights
+        dates = colInfoString(db, 4);  //col 4 is date info.
         globalTotalReps = totalReps.toString();
         globalWeights = weights.toString();
         globalCount = listBuilder(totalReps.size()).toString();
-        int rowCount = countRows(extraTableName);
+        int rowCount = countRows(db, extraTableName);
         tblBuilder(rowCount, dates, weights, totalReps);
     }
 }

@@ -42,7 +42,7 @@
         app:srcCompat="@drawable/background_o" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/deleteAcceptTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"

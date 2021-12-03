@@ -13,26 +13,24 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
     public void homeExerciseClick(View view) {
         Intent intent = new Intent(getApplicationContext(), ExerciseBuildActivity.class);
         startActivity(intent);
-        //ExerciseBuildActivity.ExerciseBuild testForResults;
     }
 
-    public void homeWorkoutClick(View view) {
-        Intent intent = new Intent(getApplicationContext(), ExerciseBuildActivity.class);  //temporary until workout activity complete.
-        startActivity(intent);
-    }
 
     public void homeResultsClick(View view) {
         Intent intent = new Intent(getApplicationContext(), ResultSelectionActivity.class);
         startActivity(intent);
     }
 
+
     public void homeStartClick(View view) {
         Intent intent = new Intent(getApplicationContext(), WorkoutSelectActivity.class);
         startActivity(intent);
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

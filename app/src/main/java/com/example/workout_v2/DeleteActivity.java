@@ -13,17 +13,19 @@ public class DeleteActivity extends AppCompatActivity {
         startActivity(intentHome);
     }
 
+
     public void deleteExerciseClick (View view) {
         Intent intent = getIntent();
         Intent intentHome = new Intent(DeleteActivity.this, HomeActivity.class);
         String extraTableName = intent.getStringExtra("tableName");
 
         //I have the table name, now we delete it.
-        SQLiteDatabase exerciseDatabase = this.openOrCreateDatabase("test1",
+        SQLiteDatabase db = this.openOrCreateDatabase("test1",
                 MODE_PRIVATE, null);
-        exerciseDatabase.execSQL("DROP TABLE IF EXISTS "+extraTableName);
+        db.execSQL("DROP TABLE IF EXISTS "+extraTableName);
         startActivity(intentHome);
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
