@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -21,7 +20,6 @@ public class ResultViewActivity extends AppCompatActivity {
     String globalTotalReps = "";
     String globalWeights = "";
     String globalCount = "";
-
 
     class PrepImage extends AsyncTask<String, Void, Void> {
         @Override
